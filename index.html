@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="categoryDropdown">Select a category:</label>
+    <select id="categoryDropdown">
+      <option value="Select one">Select one</option>
+    </select>
+
+    <br />
+    <br />
+
+    <label for="activityDropdown">Select an activity:</label>
+    <select id="activityDropdown">
+      <option value="Select one">Select one</option>
+    </select>
+    <br />
+    <br />
+
+    <div id="activityDetails">
+      <form id="purchaseForm">
+        <label for="ticketCount">Number of Tickets:</label>
+        <input type="number" id="ticketCount" min="1" max="20" required />
+
+        <br />
+        <br />
+
+        <label for="creditCard">Credit Card Number:</label>
+        <input type="text" id="creditCard" required />
+
+        <br />
+        <br />
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" required />
+        
+        <br />
+        <br />
+
+        <button id="purchaseButton">Purchase</button>
+        <button id="resetButton">Reset</button>
+      </form>
+    </div>
+
+    <div id="purchaseConfirmation"></div>
+
+    <script src="ActivitiesPage/activities.js"></script>
+  </body>
+</html>
