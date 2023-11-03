@@ -124,8 +124,8 @@ let activities = [
 const categoryDropdown = document.getElementById("categoryDropdown");
 const activityDropdown = document.getElementById("activityDropdown");
 const activityDetails = document.getElementById("activityDetails");
-const purchaseForm = document.getElementById("categoryDropdown");
-const purchaseButton = document.getElementById("categoryDropdown");
+const purchaseForm = document.getElementById("purchaseForm");
+const purchaseButton = document.getElementById("purchaseButton");
 const purchaseConfirmation = document.getElementById("purchaseConfirmation");
 
 // Categories
@@ -135,15 +135,44 @@ for (let i = 0; i < categories.length; i++) {
   categoryDropdown.appendChild(option);
   // This goes through the categories
 }
-categoryDropdown.onclick = function () { // when you click on dropdown for categories it will do a function below
+categoryDropdown.onchange = function () {
+  // when you click on dropdown for categories it will do a function below
 
   const selectedCategory = categoryDropdown.value; // selected category is the value of the dropdown selected
-  activityDropdown.innerHTML = "<option value= Select one>Select one</option>"// inner html just repeated the option tag
+  activityDropdown.innerHTML = "<option value= Select one>Select one</option>"; // inner html just repeated the option tag
   for (let i = 0; i < activities.length; i++) {
     const activity = activities[i];
     if (activity.category === selectedCategory) {
+      // goes through the activity and if the activities are completely true with the selected category it goes through
       const option = new Option(activity.name, activity.id); // grabs the name and ID
       activityDropdown.appendChild(option);
     }
   }
 };
+purchaseButton.onclick = function(){
+
+  const ticketCount = document.getElementById("ticketCount").value;
+  const creditCard = document.getElementById("creditCard").value;
+  const email = document.getElementById("email").value;
+
+  const selectedActivityId = activityDropdown.value
+  let selectedActivity = null;
+
+  for(let i = 0; i < activities.length; i++){
+    if (activities[i].id === selectedActivityId){
+      selectedActivity = activities[i];
+      break;
+    } 
+  }
+  if (selectedActivity){
+    const totalPrice = selectedActivity.price * ticketCount;
+    
+    const confirmationMessage = `You have purchased ${ticketCount} tickets(s) for ${selectedActivity.name}.
+    Total Price: $${totalPrice.toFixed(2)}
+    Credit Card: ${creditCard}
+    Email Address: ${email}`;
+
+    purchaseConfirmation.innerHTML = confirmationMessage;
+  }
+  return false
+}
