@@ -128,6 +128,24 @@ const purchaseForm = document.getElementById("purchaseForm");
 const purchaseButton = document.getElementById("purchaseButton");
 const purchaseConfirmation = document.getElementById("purchaseConfirmation");
 
+function displayActivityDetails(activity) {
+  const details = `
+    <h3>${activity.name}</h3>
+    <p>${activity.description}</p>
+    <p>Location: ${activity.location}</p>
+    <p>Price: $${activity.price.toFixed(2)}</p>
+  `;
+  activityDetails.innerHTML = details;
+}
+
+// Function to reset the form and confirmation message
+function resetForm() {
+  document.getElementById("ticketCount").value = 1;
+  document.getElementById("creditCard").value = "";
+  document.getElementById("email").value = "";
+  purchaseConfirmation.innerHTML = "";
+  activityDetails.innerHTML = "";
+}
 // Categories
 for (let i = 0; i < categories.length; i++) {
   const category = categories[i];
@@ -149,30 +167,55 @@ categoryDropdown.onchange = function () {
     }
   }
 };
-purchaseButton.onclick = function(){
+// Function to display activity details
+activityDropdown.onchange = function(){
+  const selectedActivityId = activityDropdown.value;
+  let selectedActivity = null;
+  
+  for (let i = 0; i < activities.length; i++){
+    if (activities[i].id === selectedActivityId){
+      selectedActivity = activities[i];
+      break;
+    }
+  }
+  if (selectedActivity && selectedActivity.price > 0){
+    purchaseForm.style.display = "block";
+  } else {
+    purchaseForm.style.display = "none";
+  }
+  if (selectedActivity){
+    displayActivityDetails(selectedActivity);
+  }
+};
 
+purchaseButton.onclick = function () {
   const ticketCount = document.getElementById("ticketCount").value;
   const creditCard = document.getElementById("creditCard").value;
   const email = document.getElementById("email").value;
 
-  const selectedActivityId = activityDropdown.value
+  const selectedActivityId = activityDropdown.value;
   let selectedActivity = null;
 
-  for(let i = 0; i < activities.length; i++){
-    if (activities[i].id === selectedActivityId){
+  for (let i = 0; i < activities.length; i++) {
+    if (activities[i].id === selectedActivityId) {
       selectedActivity = activities[i];
       break;
-    } 
+    }
   }
-  if (selectedActivity){
+  if (selectedActivity) {
     const totalPrice = selectedActivity.price * ticketCount;
-    
-    const confirmationMessage = `You have purchased ${ticketCount} tickets(s) for ${selectedActivity.name}.
+
+    const confirmationMessage = `You have purchased ${ticketCount} tickets(s) for ${
+      selectedActivity.name
+    }.
     Total Price: $${totalPrice.toFixed(2)}
     Credit Card: ${creditCard}
     Email Address: ${email}`;
 
     purchaseConfirmation.innerHTML = confirmationMessage;
+    displayActivityDetails(selectedActivity);
   }
-  return false
-}
+  return false;
+};
+const resetButton = document.getElementById("resetButton");
+resetButton.onclick = resetForm
