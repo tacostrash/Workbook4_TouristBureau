@@ -9,14 +9,18 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
-header, nav, main, footer {
-  background-color:  rgba(255, 255, 255, 0.7); 
+header,
+nav,
+main,
+footer {
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 20px;
 }
-main, footer {
+main,
+footer {
   background-color: rgba(255, 255, 255, 0.7);
 }
-main{
+main {
   height: auto;
 }
 
@@ -24,7 +28,7 @@ main{
 nav {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-nav ul{
+nav ul {
   list-style-type: none;
   text-align: center;
 }
@@ -39,6 +43,31 @@ nav a {
   transition: color 0.3s ease;
 }
 
-nav a:hover{
+nav a:hover {
   color: grey;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#museumImage,
+#airBalloonImage,
+#paintingImage,
+#wineryImage,
+#fireDepartmentImage {
+  width: 50%;
+}
+
+/* Center text in sections */
+#museum,
+#adventure,
+#art,
+#wine,
+#other {
+  text-align: left;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
 }
